@@ -1,0 +1,1249 @@
+/* Reset dan font dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: background 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tema Latar Belakang Cuaca (untuk tampilan harian) */
+body.weather-default {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+body.weather-cerah, body.weather-sunny {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+/* Latar belakang gelap untuk hujan */
+body.weather-hujan, body.weather-rainy {
+    background-color: #2c3e50;
+    background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+}
+body.weather-berawan, body.weather-cloudy {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Tema Latar Belakang untuk Tampilan Mingguan - BIRU */
+body.weekly-forecast-background {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Container style untuk mode mingguan */
+.container.weekly-mode {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0;
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 2.6rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Style h1 untuk mode mingguan */
+.container.weekly-mode h1 {
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowwrap;              /* 🔹 biar turun ke bawah kalau kepanjangan */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px auto;     /* 🔹 rata tengah */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 18px 25px;             /* 🔹 padding lebih lega */
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 1500px;            /* 🔹 lebar kotak ditambah */
+}
+
+/* Biar label & input lebih rapi */
+.input-group label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: 6px;
+    white-space: nowrap;          /* 🔹 teks tidak terpotong */
+}
+
+.input-group input,
+.input-group select,
+.input-group button {
+    font-size: 16px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    background: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+
+/* Biar tombol tetap seimbang */
+.input-group button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 160px;             /* 🔹 tombol lebih lebar */
+    box-shadow: 0 6px 22px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+}
+
+.input-group button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+}
+
+
+/* Input group untuk mode mingguan */
+.container.weekly-mode .input-group {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+}
+
+.input-group label,
+.input-group input,
+.input-group button {
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.input-group label {
+    padding: 0;
+    align-self: center;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Label untuk mode mingguan */
+.container.weekly-mode .input-group label {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.input-group input {
+    min-width: 200px;
+    flex-grow: 1;
+    border: 2px solid #e0e0e0;
+    background: white;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.input-group input:focus {
+    border-color: #667eea;
+    outline: none;
+    transform: scale(1.005);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3), inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.input-group button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    cursor: pointer;
+    min-width: 130px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    box-shadow: 0 6px 22px rgba(102, 126, 234, 0.5);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.input-group button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.7);
+}
+
+/* DAILY WEATHER BOX */
+.weather-box {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.8s ease forwards;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.weather-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 200% 0; }
+    50% { background-position: -200% 0; }
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    padding-bottom: 18px;
+    margin-bottom: 0;
+}
+
+.weather-header > div:first-child h2 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.weather-header > div:first-child p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.weather-temp {
+    text-align: right;
+}
+
+.weather-temp h1 {
+    font-size: 4rem;
+    color: #667eea;
+    font-weight: 700;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+.weather-temp p {
+    font-size: 15px;
+    color: #7f8c8d;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.weather-subinfo {
+    margin-top: 0;
+    font-size: 16px;
+    color: #2c3e50;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    padding: 18px;
+    border-radius: 15px;
+    border-left: 5px solid #667eea;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+}
+
+/* PERBAIKAN UTAMA: Weather Details Grid - 3x2 Layout */
+.weather-details {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px;
+}
+
+.detail-item {
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+    padding: 20px 15px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    transition: left 0.5s ease;
+}
+
+.detail-item:hover::before {
+    left: 100%;
+}
+
+.detail-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 30%, #e2e8f0 100%);
+}
+
+.detail-item img {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 12px;
+    filter: drop-shadow(2px 2px 8px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+.detail-item:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.detail-item p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #2c3e50;
+    transition: color 0.3s ease;
+}
+
+.detail-item p:first-of-type {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-item p:last-of-type {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.prediction-result {
+    margin-top: 0;
+    font-weight: 600;
+    text-align: center;
+    font-size: 18px;
+    color: #2c3e50;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.08);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+/* ===================================================================== */
+/* CSS UNTUK TAMPILAN PREDIKSI MINGGUAN - BACKGROUND BIRU */
+/* ===================================================================== */
+
+.weekly-forecast-container {
+    animation: fadeIn 0.8s ease forwards;
+    width: 100%;
+    display: none;
+    background: rgba(30, 60, 114, 0.2);
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weekly-forecast-current {
+    display: grid;
+    grid-template-areas:
+        "location location location"
+        "summary current-temp stats"
+        "weekly-info weekly-info weekly-info";
+    gap: 25px;
+    padding-bottom: 30px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    color: white;
+    min-height: 180px;
+}
+
+.weekly-forecast-current::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    border-radius: 2px;
+}
+
+.location-info {
+    grid-area: location;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.location-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.location-name::after {
+    content: '📍';
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.date-today {
+    font-size: 1rem;
+    opacity: 0.9;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.weather-summary {
+    grid-area: summary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 0;
+}
+
+.weather-icon-large {
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.weather-icon-large:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.condition-text-large {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 8px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.feels-like-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.current-temp-section {
+    grid-area: current-temp;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.temp-label-enhanced {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.current-temp {
+    font-size: 4.5rem;
+    font-weight: 700;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1;
+    color: white;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.current-temp::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.temp-range-enhanced {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.weather-stats-enhanced {
+    grid-area: stats;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    padding-top: 10px;
+}
+
+.stat-item-enhanced {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item-enhanced:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
+}
+
+.stat-item-enhanced img {
+    width: 18px;
+    height: 18px;
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+.stat-label {
+    font-weight: 500;
+    opacity: 0.9;
+    min-width: 70px;
+}
+
+.stat-value {
+    font-weight: 600;
+    min-width: 50px;
+    text-align: right;
+}
+
+.weekly-info-section {
+    grid-area: weekly-info;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.info-card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-card-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.info-card-subtitle {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-top: 2px;
+}
+
+.weekly-forecast-current::after {
+    content: 'CUACA';
+    position: absolute;
+    top: -8px;
+    right: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.9;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.date-range {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.weather-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 0;
+}
+
+.weather-icon-large {
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.condition-text-large {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 6px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
+    text-align: right;
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+.temperature-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-bottom: 15px;
+}
+
+.temp-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 0.8px;
+}
+
+.current-temp {
+    font-size: 3.8rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1;
+    color: white;
+}
+
+.thermometer-icon {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
+}
+
+.humidity-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+}
+
+.humidity-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 0.5px;
+}
+
+.humidity-icon {
+    width: 20px;
+    height: 20px;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
+}
+
+/* Bagian bawah (kartu harian) dengan background BIRU */
+.weekly-grid-daily {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: rgba(30, 60, 114, 0.4);
+    border-radius: 18px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.weekly-grid-daily::before {
+    content: 'Prediksi Cuaca Per Jam';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: rgba(30, 60, 114, 0.9);
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.daily-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 18px 18px;
+    border-radius: 15px;
+    background: rgba(30, 60, 114, 0.6);
+    text-align: center;
+    flex: 1 1 auto;
+    min-width: 90px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    cursor: pointer;
+}
+
+.daily-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.daily-card:hover::before {
+    opacity: 1;
+}
+
+.daily-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    background: rgba(30, 60, 114, 0.85);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+    z-index: 10;
+}
+
+.daily-card .day {
+    font-size: 0.8rem;
+    font-weight: 600;
+    order: 1;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.daily-card .weather-icon-small {
+    width: 45px;
+    height: 45px;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
+    order: 2;
+    transition: transform 0.3s ease;
+}
+
+.daily-card:hover .weather-icon-small {
+    transform: scale(1.15);
+}
+
+.daily-card .temp {
+    font-size: 1.4rem;
+    font-weight: 700;
+    order: 3;
+    line-height: 1.2;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.daily-card .condition {
+    font-size: 0.8rem;
+    font-weight: 500;
+    order: 4;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    margin-top: 2px;
+    text-transform: capitalize;
+}
+
+.daily-card .humidity-info {
+    font-size: 0.7rem;
+    order: 5;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.daily-card:hover .humidity-info {
+    opacity: 1;
+}
+
+/* Pulse animation untuk card hari ini */
+.daily-card.today {
+    animation: pulse-glow 2s infinite;
+    border: 2px solid rgba(255, 215, 0, 0.6);
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(255, 215, 0, 0.1);
+    }
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+    .weekly-forecast-current {
+        grid-template-areas:
+            "location"
+            "summary"
+            "current-temp" 
+            "stats"
+            "weekly-info";
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .weather-stats-enhanced {
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .weekly-info-section {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .daily-card {
+        min-width: 80px;
+        padding: 15px 6px;
+    }
+    
+    .daily-card .weather-icon-small {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .current-temp {
+        font-size: 3.5rem;
+    }
+}
+
+/* Loading animation enhancement */
+@keyframes enhanced-loading {
+    0% { 
+        transform: rotate(0deg) scale(1);
+        border-color: rgba(102, 126, 234, 0.3) rgba(102, 126, 234, 0.3) #667eea rgba(102, 126, 234, 0.3);
+    }
+    50% { 
+        transform: rotate(180deg) scale(1.1);
+        border-color: rgba(102, 126, 234, 0.3) #667eea rgba(102, 126, 234, 0.3) rgba(102, 126, 234, 0.3);
+    }
+    100% { 
+        transform: rotate(360deg) scale(1);
+        border-color: #667eea rgba(102, 126, 234, 0.3) rgba(102, 126, 234, 0.3) rgba(102, 126, 234, 0.3);
+    }
+}
+
+/* LOADING ANIMATION & ALERT BOX */
+.loading {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border: 4px solid rgba(102, 126, 234, 0.3);
+    border-radius: 50%;
+    border-top-color: #667eea;
+    animation: enhanced-loading 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.message-box.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.message-box-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+}
+
+.message-box-content p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.message-box-content button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.message-box-content button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5);
+}
+
+/* ===================================================================== */
+/* ANIMASI CUACA YANG DIPERBAIKI - AWAN LEBIH BESAR DAN HUJAN LEBIH BANYAK */
+/* ===================================================================== */
+
+#weatherAnimationContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    display: none;
+}
+
+/* Gaya untuk awan yang menggunakan gambar - UKURAN DIPERBESAR */
+.cloud-image {
+    position: absolute;
+    height: auto;
+    object-fit: contain;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    opacity: 0.8;
+    will-change: transform, opacity;
+    /* Ukuran default awan diperbesar dari 150px menjadi 250px */
+    min-width: 250px;
+}
+ 
+/* Gaya untuk gambar matahari */
+.sun-image {
+    position: absolute;
+    top: 5vh;
+    right: 5vw;
+    width: 300px;
+    height: auto;
+    animation: sun-fade-in 2s ease-out forwards;
+}
+
+@keyframes sun-fade-in {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Animasi awan bergerak dari kiri ke kanan */
+/* Gerakan Awan dari kiri ke kanan (khusus bagian atas) */
+@keyframes cloud-move-top-left-to-right {
+    0% {
+        transform: translateX(-20vw) translateY(5vh);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(150vw) translateY(5vh);
+    }
+}
+
+/* Gerakan Awan dari kanan ke kiri (khusus bagian atas) */
+@keyframes cloud-move-top-right-to-left {
+    0% {
+        transform: translateX(120vw) translateY(5vh);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(-150vw) translateY(5vh);
+    }
+}
+
+/* Gerakan Awan dari kiri ke kanan (khusus bagian bawah) */
+@keyframes cloud-move-bottom-left-to-right {
+    0% {
+        transform: translateX(-200vw) translateY(25vh);
+    }
+    100% {
+        transform: translateX(150vw) translateY(25vh);
+    }
+}
+
+/* Gerakan Awan dari kanan ke kiri (khusus bagian bawah) */
+@keyframes cloud-move-bottom-right-to-left {
+    0% {
+        transform: translateX(200vw) translateY(25vh);
+    }
+    100% {
+        transform: translateX(-150vw) translateY(25vh);
+    }
+}
+
+/* Efek awal awan yang muncul di posisi statis lalu bergerak (untuk animasi hujan) */
+@keyframes static-to-moving-right {
+    0% {
+        transform: translateX(0vw) translateY(0vh);
+    }
+    100% {
+        transform: translateX(150vw) translateY(0vh);
+    }
+}
+
+@keyframes static-to-moving-left {
+    0% {
+        transform: translateX(0vw) translateY(0vh);
+    }
+    100% {
+        transform: translateX(-150vw) translateY(0vh);
+    }
+}
+
+/* **PERBAIKAN: Animasi awan zigzag diubah ke posisi atas** */
+@keyframes cloud-move-zigzag-avoid-center {
+    0% {
+        transform: translateX(-50%) translateY(3vh) scale(1.2);
+        opacity: 0.9;
+    }
+    25% {
+        transform: translateX(25vw) translateY(1vh) scale(1.25);
+    }
+    50% {
+        transform: translateX(55vw) translateY(4vh) scale(1.3);
+    }
+    75% {
+        transform: translateX(85vw) translateY(1vh) scale(1.35);
+    }
+    100% {
+        transform: translateX(300%) translateY(3vh) scale(1.4);
+        opacity: 0.8;
+    }
+}
+
+@keyframes cloud-move-zigzag-reverse-avoid-center {
+    0% {
+        transform: translateX(120%) translateY(3vh) scale(1.4);
+        opacity: 0.9;
+    }
+    25% {
+        transform: translateX(70vw) translateY(1vh) scale(1.35);
+    }
+    50% {
+        transform: translateX(40vw) translateY(4vh) scale(1.3);
+    }
+    75% {
+        transform: translateX(20vw) translateY(1vh) scale(1.25);
+    }
+    100% {
+        transform: translateX(-100%) translateY(3vh) scale(1.2);
+        opacity: 0.9;
+    }
+}
+
+/* TETESAN AIR HUJAN - DIPERBANYAK DAN DIPERBESAR */
+.raindrop {
+    position: fixed;
+    width: 3px;
+    height: 25px;
+    background: linear-gradient(to bottom, #76a8fa, #2a5298);
+    border-radius: 50%;
+    opacity: 0;
+    animation: raindrop-fall 0.8s linear forwards;
+    pointer-events: none;
+    filter: blur(0.3px);
+    box-shadow: 0 0 3px rgba(118, 168, 250, 0.6);
+}
+
+/* Variasi tetesan hujan dengan ukuran berbeda */
+.raindrop-small {
+    width: 2px;
+    height: 15px;
+    animation-duration: 1s;
+}
+
+.raindrop-medium {
+    width: 3px;
+    height: 20px;
+    animation-duration: 0.9s;
+}
+
+.raindrop-large {
+    width: 4px;
+    height: 30px;
+    animation-duration: 0.7s;
+    background: linear-gradient(to bottom, #5d9cfa, #1e4a8c);
+}
+
+@keyframes raindrop-fall {
+    0% { 
+        transform: translateY(-10vh) rotate(5deg); 
+        opacity: 0.9; 
+    }
+    100% { 
+        transform: translateY(110vh) rotate(15deg); 
+        opacity: 0; 
+    }
+}
+
+/* MEDIA QUERIES untuk responsivitas */
+@media (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .input-group input,
+    .input-group button {
+        width: 100%;
+    }
+    .weather-details {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    .weather-header > div:first-child h2 {
+        font-size: 1.8rem;
+    }
+    .weather-temp h1 {
+        font-size: 3rem;
+    }
+    .weekly-grid-daily {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .daily-card {
+        flex-basis: 45%;
+        margin-bottom: 10px;
+    }
+    
+    /* Responsivitas untuk awan di mobile */
+    .cloud-image {
+        min-width: 180px;
+    }
+    
+    #weatherAnimationContainer {
+        height: 35vh;
+    }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Cuaca</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="weather-default">
+
+<!-- Memindahkan weatherAnimationContainer ke luar container utama -->
+<div id="weatherAnimationContainer"></div>
+
+<div class="container">
+    <h1> 🌤️ Prediksi Cuaca</h1>
+
+    <div class="input-group">
+        <label for="tanggal">📅 Pilih Tanggal:</label>
+        <input type="date" id="tanggal" name="tanggal" required/>
+        
+        <label for="jam">⏰ Pilih Jam:</label>
+        <select id="jam" name="jam" required>
+            <option value="" disabled selected>Pilih Jam</option>
+        </select>
+
+        <button type="button" id="predictButton">🌡️ Prediksi Harian</button>
+        <button type="button" id="predictWeeklyButton">⏰ Prediksi Per Jam</button>
+    </div>
+
+    <div class="weather-box" id="weatherBox" style="display: none;">
+        <!-- weatherAnimationContainer kini berada di luar weatherBox, jadi tidak perlu di sini -->
+        <div id="weatherContent">
+            </div>
+    </div>
+
+    <div class="weekly-forecast-container" id="weeklyForecastContainer" style="display: none;">
+        <div class="weekly-forecast-current" id="weeklyForecastCurrent"></div>
+        <div class="weekly-grid-daily" id="weeklyGrid"></div>
+    </div>
+</div>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
