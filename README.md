@@ -15,9 +15,9 @@ Dibangun menggunakan **Flask** (backend), **HTML, CSS, dan JavaScript** (fronten
 ## 🚀 Cara Menjalankan
 1. Clone repository ini:
    ```bash
-   git clone https://github.com/username/Prediksi-Cuaca.git
+   git clone https://github.com/PutriMasya/Prediksi-Cuaca.git
 2. Masuk ke folder proyek:
-   cd prediksi-cuaca-per-jam
+   cd Prediksi-Cuaca/WebCuaca
 3. Instal dependensi Python:
    pip install -r requirements.txt
 4. Jalankan aplikasi Flask
