@@ -1,5 +1,5 @@
 # Prediksi-Cuaca
-Penanganan ketidakseimbangan data pada data historis cuaca perjam kota ambon untuk prediksi cuaca menggunakan algoritma SVM.
+Penanganan ketidakseimbangan data pada data historis cuaca per jam Kota Ambon untuk prediksi cuaca menggunakan algoritma SVM.
 
 # 🌤️ Prediksi Cuaca Per Jam
 
